@@ -5,22 +5,28 @@ using UnityEngine;
 public class DamageOnTouch : MonoBehaviour
 {
     public LayerMask TargetLayerMask;
+    public int _damageTakenEveryTime;
 
-    [SerializeField] protected float damageAmount;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] protected float _damageAmount;
+
+    Health _health;
+
+    private void Awake()
     {
-        
+        _health = GetComponent<Health>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponent<Health>().Damage(damageAmount);     
+        Debug.Log("sd");
+        collision.GetComponent<Health>().Damage(_damageAmount);
+        Debug.Log(collision.GetComponent<Health>().currentHealth);
+        SelfDamage(_damageTakenEveryTime);
+    }
+
+    public void SelfDamage(float damage)
+    {
+        _health?.Damage(damage);
     }
 }

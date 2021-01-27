@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class DeathState : IState
 {
-    const string ANIM_KILL_PLAYER_TRIGGER = "killPlayer";
+    CharacterAI _characterAI;
 
-    Animator _animator;
-    CharacterSoundEffects _characterSoundEffects;
-
-    public DeathState(Animator animator, CharacterSoundEffects characterSoundEffects)
+    public DeathState(CharacterAI characterAI)
     {
-        _animator = animator;
-        _characterSoundEffects = characterSoundEffects;
+        _characterAI = characterAI;
     }
 
     public void Tick() { }
     public void OnEnter()
     {
-        _animator.SetTrigger(ANIM_KILL_PLAYER_TRIGGER);
-        _characterSoundEffects.PlayDeathSound();
+        _characterAI.KillCharacter();
     }
     public void OnExit() { }
 }

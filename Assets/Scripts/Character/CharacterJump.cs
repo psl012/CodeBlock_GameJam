@@ -7,6 +7,7 @@ public class CharacterJump : MonoBehaviour
     [Range(1, 50)] public float jumpVelocity;
     [Range(1, 50)] public float fallMultiplier = 2.5f;
     [Range(1, 50)] public float lowJumpMultiplier = 2f;
+    [Range(1, 50)] public float horizontalJumpMultiplier = 2f;
 
     LayerMask _groundLayerMask;
     BoxCollider2D _boxCollider2D;
@@ -37,7 +38,8 @@ public class CharacterJump : MonoBehaviour
         if (_jumpRequest)
         {
             _jumpRequest = false;
-            _rigidBody.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
+            Vector2 jumpForce = new Vector2(horizontalJumpMultiplier, jumpVelocity);
+            _rigidBody.AddForce(jumpForce, ForceMode2D.Impulse);
         }
 
         JumpGravity();

@@ -17,8 +17,8 @@ TagManager:
   - Ground
   - Trampoline
   - Player
-  - 
-  - 
+  - Enemy
+  - Interactables
   - 
   - 
   - 

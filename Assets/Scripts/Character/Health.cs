@@ -12,6 +12,11 @@ public class Health : MonoBehaviour
     [Header("Status")]
     public bool isInvulnerable;
 
+    [Header("Death Parameters")]
+    public bool _isDestroyOnDeath;
+    public float _delayTillDestroy;
+
+
     private void Awake()
     {
         currentHealth = initialHealth;
@@ -22,5 +27,17 @@ public class Health : MonoBehaviour
         if (isInvulnerable) return;
 
         currentHealth -= damage;
+
+        if (_isDestroyOnDeath && currentHealth <= 0)
+        {
+            Destroy(gameObject, _delayTillDestroy);
+        }
     }
+
+
+    
+
+
+    
+
 }

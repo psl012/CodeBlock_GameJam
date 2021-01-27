@@ -5,37 +5,34 @@ using UnityEngine;
 
 public class CharacterAI : MonoBehaviour
 {
+    const string ANIM_KILL_PLAYER_TRIGGER = "killPlayer";
 
     StateMachine _stateMachine;
+
+    public Animator _modelAnimator { get; private set; }
 
     Character _character;
     CharacterMovement _characterMovement;
     CharacterJump _characterJump;
-    Health _health;
+    CharacterHandleWeapon _characterHandleWeapon;
     CharacterSoundEffects _characterSoundEffects;
-
-    [Header("Field Attributes")]
-    [SerializeField] Animator _modelAnimator;
- 
+    Weapon _weapon;
+    Health _health;
 
 
     private void Awake()
     {
-        _stateMachine = new StateMachine();
-
-        _characterMovement = GetComponent<CharacterMovement>();
-        _characterJump = GetComponent<CharacterJump>();
-        _health = GetComponent<Health>();
-        _modelAnimator = GetComponentInChildren<Animator>();
-        _characterSoundEffects = GetComponent<CharacterSoundEffects>();
-               
+        Initialize();
 
         HandleInitialze();
 
-        var runningState = new RunningState(_characterMovement, _characterJump, _modelAnimator);
-        var DeathState = new DeathState(_modelAnimator, _characterSoundEffects);          
+        var runningState = new RunningState(this);
+        var deathState = new DeathState(this);
+        var runAndGunState = new RunAndGunState(this);
 
-        At(runningState, DeathState, PlayerDead());
+        At(runningState, deathState, PlayerDead());
+        At(runningState, runAndGunState, isEquipWeapon());
+        At(runAndGunState, runningState, isWeaponDestroyed());
 
         _stateMachine.SetState(runningState);
 
@@ -43,6 +40,8 @@ public class CharacterAI : MonoBehaviour
 
         Func<bool> StageStart() => () => true;
         Func<bool> PlayerDead() => () => _health.currentHealth <= 0;
+        Func<bool> isEquipWeapon() => () => _characterHandleWeapon._weaponAttachments.isWeaponCreated;
+        Func<bool> isWeaponDestroyed() => () => !_characterHandleWeapon._weaponAttachments.isWeaponCreated;
     }
 
     // Update is called once per frame
@@ -51,16 +50,51 @@ public class CharacterAI : MonoBehaviour
         _stateMachine.Tick();
     }
 
+    
+
+    public void MoveRight()
+    {
+        _characterMovement?.MoveRight();
+    }
+
+    public void Jump()
+    {
+        _characterJump?.Jump();
+        _characterSoundEffects?.PlayJumpSound();
+    }
+
+    public void KillCharacter()
+    {
+        _modelAnimator?.SetTrigger(ANIM_KILL_PLAYER_TRIGGER);
+        _characterSoundEffects?.PlayDeathSound();
+    }
+
+
+    public void EquipWeapon()
+    {
+        _weapon = _characterHandleWeapon._weaponAttachments.GetComponentInChildren<Weapon>();
+    }
+
+    public void UseWeapon()
+    {
+        _weapon?.WeaponUse();
+    }
+
+    void Initialize()
+    {
+        _stateMachine = new StateMachine();
+
+        _characterMovement = GetComponent<CharacterMovement>();
+        _characterJump = GetComponent<CharacterJump>();
+        _characterHandleWeapon = GetComponent<CharacterHandleWeapon>();
+        _health = GetComponent<Health>();
+        _modelAnimator = GetComponentInChildren<Animator>();
+        _characterSoundEffects = GetComponent<CharacterSoundEffects>();
+    }
+
     void HandleInitialze()
     {
         if (_characterJump == null) Debug.LogWarning("_characterJump is NULL!");
         if (_characterMovement == null) Debug.LogWarning("_characterMovement is NULL!");
     }
-
-    public void Jump()
-    {
-        _characterJump.Jump();
-        _characterSoundEffects.PlayJumpSound();
-    }
-
 }

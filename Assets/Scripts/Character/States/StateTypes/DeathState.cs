@@ -15,6 +15,7 @@ public class DeathState : IState
     public void OnEnter()
     {
         _characterAI.KillCharacter();
+        LevelManager.instance.PlayerDeath();
     }
     public void OnExit() { }
 }

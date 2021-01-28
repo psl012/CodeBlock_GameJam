@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAI : MonoBehaviour
+public class CharacterAI : Character
 {
     const string ANIM_KILL_PLAYER_TRIGGER = "killPlayer";
 
@@ -50,7 +50,11 @@ public class CharacterAI : MonoBehaviour
         _stateMachine.Tick();
     }
 
-    
+    public override void HitCharacter()
+    {
+        base.HitCharacter();
+        _characterSoundEffects?.PlayHitSound();
+    }
 
     public void MoveRight()
     {

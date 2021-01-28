@@ -19,7 +19,6 @@ public class DamageOnTouch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("sd");
         collision.GetComponent<Health>().Damage(_damageAmount);
         Debug.Log(collision.GetComponent<Health>().currentHealth);
         SelfDamage(_damageTakenEveryTime);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8995131206825991942}
   - component: {fileID: 7029894851014695222}
   - component: {fileID: 8921465658263648046}
-  - component: {fileID: 5620578752205504526}
+  - component: {fileID: -129723299745733067}
   m_Layer: 0
   m_Name: RifleBullet
   m_TagString: Untagged
@@ -51,7 +51,7 @@ MonoBehaviour:
   TargetLayerMask:
     serializedVersion: 2
     m_Bits: 2048
-  _damageTakenEveryTime: 0
+  _damageTakenEveryTime: 1
   _damageAmount: 1
 --- !u!50 &8995131206825991942
 Rigidbody2D:
@@ -115,7 +115,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4559132, y: 0.19142687}
   m_EdgeRadius: 0
---- !u!114 &5620578752205504526
+--- !u!114 &-129723299745733067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,15 +124,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2985823170722240399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aa7bb34c18ab9948a8d3735f726df5d, type: 3}
+  m_Script: {fileID: 11500000, guid: a71277c4400372349b73f2fa891825a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 10
-  currentHealth: 10
-  maximumhealth: 10
+  initialHealth: 1
+  currentHealth: 1
+  maximumhealth: 1
   isInvulnerable: 0
   _isDestroyOnDeath: 1
   _delayTillDestroy: 0
+  _isDisableColliderOnDeath: 0
+  _delayTilldDisable: 0
+  _lifeTime: 0.28
 --- !u!1 &5473577394708834665
 GameObject:
   m_ObjectHideFlags: 0

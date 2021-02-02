@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
 
     }
 
-    private void Start()
+    void Start()
     {
         _character = GetComponent<Character>();
     }

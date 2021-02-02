@@ -6,7 +6,7 @@ public class DamageOnTouch : MonoBehaviour
 {
     public LayerMask TargetLayerMask;
     public int _damageTakenEveryTime;
-
+        
     [SerializeField] protected float _damageAmount;
 
     Health _health;
@@ -19,6 +19,11 @@ public class DamageOnTouch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!IsLayerTarget.LayerInLayerMask(collision.gameObject.layer, TargetLayerMask))
+        {
+            return;
+        }
+
         collision.GetComponent<Health>().Damage(_damageAmount);
         Debug.Log(collision.GetComponent<Health>().currentHealth);
         SelfDamage(_damageTakenEveryTime);

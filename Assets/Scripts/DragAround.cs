@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class DragAround : MonoBehaviour
 {
-    public GameObject correctForm;
+    public DragAroundTarget correctForm;
+    public bool isCorrectPosition { get; set; } = false;
+
 
     float _startPosX;
     float _startPosY;
     Collider2D _collider2D;
 
     bool _isMoving = false;
+    Rigidbody2D _rigidBody;
 
     private void Awake()
     {
         _collider2D = GetComponent<Collider2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -34,6 +38,7 @@ public class DragAround : MonoBehaviour
 
             transform.localPosition = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, transform.localPosition.z);
         }
+
     }
 
     private void OnMouseDown()
@@ -59,14 +64,27 @@ public class DragAround : MonoBehaviour
 
         if (_collider2D != null) _collider2D.enabled = true;
         if (correctForm != null)
-        {   
-            if (Mathf.Abs(transform.localPosition.x - correctForm.transform.localPosition.x) <= 0.5f &&
-                Mathf.Abs(transform.localPosition.y - correctForm.transform.localPosition.y) <= 0.5f)
-            {
-                transform.localPosition = new Vector3(correctForm.transform.localPosition.x, correctForm.transform.localPosition.y, correctForm.transform.localPosition.z);
-            }
+        {
+            CheckCorrectPosition();
         }
 
     }
 
+    private void CheckCorrectPosition()
+    {
+        if (Mathf.Abs(transform.position.x - correctForm.transform.position.x) <= 0.5f &&
+            Mathf.Abs(transform.position.y - correctForm.transform.position.y) <= 0.5f)
+        {
+            transform.position = new Vector3(correctForm.transform.position.x, correctForm.transform.position.y, correctForm.transform.position.z);
+            isCorrectPosition = true;
+            _rigidBody.velocity = Vector2.zero;
+            _rigidBody.isKinematic = true;
+            correctForm.isObjectInCorrectPosition = true;
+        }
+        else
+        {
+            _rigidBody.isKinematic = false;
+            correctForm.isObjectInCorrectPosition = false;
+        }
+    }
 }

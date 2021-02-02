@@ -20,14 +20,14 @@ public class Health : MonoBehaviour
     public bool _isDisableColliderOnDeath;
     public float _delayTilldDisable;
 
-    Collider2D _collider2D;
+    Collider2D[] _collider2D;
 
     Character _character;
 
     private void Awake()
     {
         currentHealth = initialHealth;
-        _collider2D = GetComponent<Collider2D>();
+        _collider2D = GetComponents<Collider2D>();
 
     }
 
@@ -50,7 +50,8 @@ public class Health : MonoBehaviour
 
         if (_isDisableColliderOnDeath && currentHealth <= 0)
         {
-            _collider2D.enabled = false;
+            foreach(Collider2D col in _collider2D)
+            col.enabled = false;
         }
     }
 

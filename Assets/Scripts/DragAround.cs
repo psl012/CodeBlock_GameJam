@@ -36,7 +36,7 @@ public class DragAround : MonoBehaviour
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            transform.localPosition = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, transform.localPosition.z);
+            transform.position = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, transform.localPosition.z);
         }
 
     }

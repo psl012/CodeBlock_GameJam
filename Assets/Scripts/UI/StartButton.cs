@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
@@ -28,9 +29,14 @@ public class StartButton : MonoBehaviour
 
         foreach (DragAroundTarget dr in _dragAroundTargets)
         {
-            _isObjectsInCorrectPosition = _isObjectsInCorrectPosition && dr.isObjectInCorrectPosition;
+            _isObjectsInCorrectPosition = _isObjectsInCorrectPosition && dr.isObjectInCorrectPosition;           
         }
 
-        Debug.Log(_isObjectsInCorrectPosition);
+        if (_isObjectsInCorrectPosition)
+        {
+            SceneManager.LoadScene(1);
+        }
+
+        
     }
 }

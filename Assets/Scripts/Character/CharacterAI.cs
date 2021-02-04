@@ -33,6 +33,7 @@ public class CharacterAI : Character
         At(runningState, deathState, PlayerDead());
         At(runningState, runAndGunState, isEquipWeapon());
         At(runAndGunState, runningState, isWeaponDestroyed());
+        At(runAndGunState, deathState, PlayerDead());
 
         _stateMachine.SetState(runningState);
 

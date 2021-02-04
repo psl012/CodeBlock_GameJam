@@ -25,8 +25,7 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-       // respawnCount = 0;
+ 
     }
 
     void Start()

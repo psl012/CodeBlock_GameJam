@@ -332,6 +332,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5626981861900687155, guid: bc6e00004cfd78a46a19671ef03bbeee,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 5626981861900687155, guid: bc6e00004cfd78a46a19671ef03bbeee,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc6e00004cfd78a46a19671ef03bbeee, type: 3}
 --- !u!4 &83022465 stripped
@@ -1186,7 +1196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.03888893, y: 0.049999952, z: -10}
+  m_LocalPosition: {x: 0.03379059, y: 0.049999952, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 147865204}
@@ -7926,6 +7936,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5317272145821083497, guid: 37ff1b18e9fd8194cb8e02757853ab6b,
+        type: 3}
+      propertyPath: _hitSoundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 908398938f80b1b438e96ea3e7716b9c, type: 3}
     - target: {fileID: 5317272145821083498, guid: 37ff1b18e9fd8194cb8e02757853ab6b,
         type: 3}
       propertyPath: m_Name
@@ -8133,6 +8148,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1103352400, guid: 8fa67aa33bf693d4791084f019635556, type: 3}
+      propertyPath: _deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 77af43068d3d7c6418c32faf43fd4a9e, type: 3}
     - target: {fileID: 512481557539113865, guid: 8fa67aa33bf693d4791084f019635556,
         type: 3}
       propertyPath: m_RootOrder

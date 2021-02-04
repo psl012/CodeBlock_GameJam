@@ -12,6 +12,7 @@ public class Trampoline : MonoBehaviour
         {
             isUsed = true;
             collision.GetComponent<CharacterAI>().Jump();
+            Destroy(gameObject,0.1f);
         }
     }
 

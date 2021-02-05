@@ -6,10 +6,10 @@ public class RunningState : IState
 {
     const string ANIM_RUN_BOOL = "isRunning";
 
-    CharacterAI _characterAI;
+    AI_Player _characterAI;
     CharacterMovement _characterMovement;
 
-    public RunningState(CharacterAI characterAI)
+    public RunningState(AI_Player characterAI)
     {
         _characterAI = characterAI;
         _characterMovement = _characterAI.GetComponent<CharacterMovement>();

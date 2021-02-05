@@ -11,7 +11,7 @@ public class Trampoline : MonoBehaviour
         if (collision.tag == "Player" && !isUsed)
         {
             isUsed = true;
-            collision.GetComponent<CharacterAI>().Jump();
+            collision.GetComponent<AI_Player>().Jump();
             Destroy(gameObject,0.1f);
         }
     }

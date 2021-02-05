@@ -6,13 +6,13 @@ public class RunAndGunState : IState
 {
     const string ANIM_RUN_BOOL = "isRunning";
 
-    CharacterAI _characterAI;
+    AI_Player _characterAI;
     CharacterMovement _characterMovement;
     CharacterHandleWeapon _characterHandleWeapon;
 
     Weapon _weapon;
 
-    public RunAndGunState(CharacterAI characterAI)
+    public RunAndGunState(AI_Player characterAI)
     {
         _characterAI = characterAI;
         _characterHandleWeapon = _characterAI._characterHandleWeapon; 

@@ -3,22 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAI : Character
+public class AI_Player : Character
 {
-
-
-    StateMachine _stateMachine;
-
-    public Animator _modelAnimator { get; set; }
     public CharacterMovement _characterMovement{get; set;}
     CharacterJump _characterJump;
     public CharacterHandleWeapon _characterHandleWeapon{get; set;}
-    public CharacterSoundEffects _characterSoundEffects{get; set;}
-
-    Health _health;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         Initialize();
 
         HandleInitialze();
@@ -36,7 +28,7 @@ public class CharacterAI : Character
 
         void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
 
-        Func<bool> StageStart() => () => true;
+      //  Func<bool> StageStart() => () => true;
         Func<bool> PlayerDead() => () => _health.currentHealth <= 0;
         Func<bool> isEquipWeapon() => () => _characterHandleWeapon._weaponAttachments.isWeaponCreated;
         Func<bool> isWeaponDestroyed() => () => !_characterHandleWeapon._weaponAttachments.isWeaponCreated;
@@ -57,14 +49,9 @@ public class CharacterAI : Character
 
     void Initialize()
     {
-        _stateMachine = new StateMachine();
-
         _characterMovement = GetComponent<CharacterMovement>();
         _characterJump = GetComponent<CharacterJump>();
         _characterHandleWeapon = GetComponent<CharacterHandleWeapon>();
-        _health = GetComponent<Health>();
-        _modelAnimator = GetComponentInChildren<Animator>();
-        _characterSoundEffects = GetComponent<CharacterSoundEffects>();
     }
 
     void HandleInitialze()

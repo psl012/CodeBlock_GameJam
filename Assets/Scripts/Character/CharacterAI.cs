@@ -5,20 +5,17 @@ using UnityEngine;
 
 public class CharacterAI : Character
 {
-    const string ANIM_KILL_PLAYER_TRIGGER = "killPlayer";
+
 
     StateMachine _stateMachine;
 
-    public Animator _modelAnimator { get; private set; }
-
-    Character _character;
-    CharacterMovement _characterMovement;
+    public Animator _modelAnimator { get; set; }
+    public CharacterMovement _characterMovement{get; set;}
     CharacterJump _characterJump;
-    CharacterHandleWeapon _characterHandleWeapon;
-    CharacterSoundEffects _characterSoundEffects;
-    Weapon _weapon;
-    Health _health;
+    public CharacterHandleWeapon _characterHandleWeapon{get; set;}
+    public CharacterSoundEffects _characterSoundEffects{get; set;}
 
+    Health _health;
 
     private void Awake()
     {
@@ -51,38 +48,11 @@ public class CharacterAI : Character
         _stateMachine.Tick();
     }
 
-    public override void HitCharacter()
-    {
-        base.HitCharacter();
-        _characterSoundEffects?.PlayHitSound();
-    }
-
-    public void MoveRight()
-    {
-        _characterMovement?.MoveRight();
-    }
-
+    // Invariants
     public void Jump()
     {
         _characterJump?.Jump();
         _characterSoundEffects?.PlayJumpSound();
-    }
-
-    public void KillCharacter()
-    {
-        _modelAnimator?.SetTrigger(ANIM_KILL_PLAYER_TRIGGER);
-        _characterSoundEffects?.PlayDeathSound();
-    }
-
-
-    public void EquipWeapon()
-    {
-        _weapon = _characterHandleWeapon._weaponAttachments.GetComponentInChildren<Weapon>();
-    }
-
-    public void UseWeapon()
-    {
-        _weapon?.WeaponUse();
     }
 
     void Initialize()

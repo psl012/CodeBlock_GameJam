@@ -7,16 +7,18 @@ public class RunningState : IState
     const string ANIM_RUN_BOOL = "isRunning";
 
     CharacterAI _characterAI;
+    CharacterMovement _characterMovement;
 
     public RunningState(CharacterAI characterAI)
     {
         _characterAI = characterAI;
+        _characterMovement = _characterAI.GetComponent<CharacterMovement>();
     }
     
     // Start is called before the first frame update
     public void Tick()
     {
-        _characterAI.MoveRight();
+        MoveRight();
     }
 
     // Update is called once per frame
@@ -28,6 +30,11 @@ public class RunningState : IState
     public void OnExit()
     {
 
+    }
+
+    public void MoveRight()
+    {
+        _characterMovement?.MoveRight();
     }
         
 }
